@@ -1,0 +1,104 @@
+syntax = "proto3";  // 版本声明
+package grpcinclass; // 包名，包名可以避免对message类型之间的名字冲突，同名的message可以通过package进行区分
+option go_package = "/pb"; // 生成的go文件的package名（基于一定规则生成）
+
+
+//用于无需token的服务，可返回token
+service UserService{
+  rpc Login(LoginReq)returns(LoginResp){}
+  rpc Register(RegisterReq)returns(RegisterResp){}
+  rpc ChangePwd(ChangePwdReq)returns(ChangePwdResp){}
+  rpc UpdateUser(UpdateUserReq)returns(UpdateUserResp){}
+  rpc GetUserById(GetUserByIdReq)returns(GetUserByIdResp){}
+  rpc GetUserByUserName(GetUserByUserNameReq)returns(GetUserByUserNameResp){}
+}
+
+//user内容
+message User{
+  int32 ID = 1;
+  string Username = 2;
+  string Password=3;
+  int32 Gender = 4;   //0为男，1为女
+  string Name = 5;
+  string Phone = 6;
+  string Email = 7;
+  int32 State = 8;      //(0为有效用户，1为无效)
+  int32 GroupId = 9;   //成员组id,1为超级管理员，0为普通用户
+}
+
+//回复消息一般内容
+message Resp{
+  bool Status = 1;  //返回状态
+  string Data = 2; //返回结果信息
+
+}
+
+//登陆部分
+message LoginReq{
+  string Username = 1;
+  string Password = 2;
+}
+
+message LoginResp{
+  Resp Resp=1;
+}
+
+message LoginByEmailReq{
+  string Email = 1;
+  string Password = 2;
+}
+
+message LoginBySmsReq{
+  string Phone = 1;
+  string Code = 2;  //验证码
+}
+
+
+//注册部分
+message RegisterReq{
+  User User=1;
+}
+
+message RegisterResp{
+  Resp Resp=1;
+}
+
+//修改密码部分
+message ChangePwdReq{
+  int32 ID=1;
+  string OldPassword=2;
+  string NewPassword=3;
+}
+
+message ChangePwdResp{
+  Resp Resp=1;
+}
+
+//更新用户
+message UpdateUserReq{
+  User User=1;
+}
+
+message UpdateUserResp{
+  Resp Resp=1;
+  User User=2;
+}
+
+//获取用户
+message GetUserByIdReq{
+  int32 ID=1;
+}
+
+message GetUserByIdResp{
+  Resp Resp=1;
+  User User=2;
+}
+
+message GetUserByUserNameReq{
+  string UserName=1;
+}
+
+message GetUserByUserNameResp{
+  Resp Resp=1;
+  User User=2;
+}
