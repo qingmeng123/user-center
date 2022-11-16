@@ -11,12 +11,12 @@ import (
 	"fmt"
 	"gopkg.in/ini.v1"
 	"strings"
-	"user-center/server/cache"
-	"user-center/server/dao"
+	"user-center/cache"
+	"user-center/dao"
 )
 
 var (
-	UserTcpPort          string
+	UserTcpPort string
 	Db          string
 	DbHost      string
 	DbPort      string
@@ -32,7 +32,7 @@ var (
 
 func Init() {
 	//从本地读取环境
-	file, err := ini.Load("./server/conf/config.ini")
+	file, err := ini.Load("./conf/config.ini")
 	if err != nil {
 		fmt.Println("ini load failed", err)
 	}

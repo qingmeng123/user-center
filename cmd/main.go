@@ -8,8 +8,8 @@
 package main
 
 import (
-	"user-center/server/api"
-	"user-center/server/conf"
+	"user-center/api"
+	"user-center/conf"
 )
 
 func main() {

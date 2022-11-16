@@ -18,13 +18,13 @@ import (
 func getCreds() credentials.TransportCredentials {
 	//双向证书
 	//从证书相关文件中读取和解析信息，得到证书公钥，私钥对
-	cert, err := tls.LoadX509KeyPair("server/pbfile/cert/server.pem", "server/pbfile/cert/server.key")
+	cert, err := tls.LoadX509KeyPair("pbfile/cert/server.pem", "pbfile/cert/server.key")
 	if err != nil {
 		log.Fatal("证书读取错误", err)
 	}
 	//创建一个新的，空的CertPool
 	certPool := x509.NewCertPool()
-	ca, err := ioutil.ReadFile("server/pbfile/cert/ca.crt")
+	ca, err := ioutil.ReadFile("pbfile/cert/ca.crt")
 	if err != nil {
 		log.Fatal("ca证书读取错误", err)
 	}

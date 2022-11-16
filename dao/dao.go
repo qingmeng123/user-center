@@ -12,7 +12,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
-	"user-center/server/model"
+	"user-center/model"
 )
 
 var db *gorm.DB
@@ -21,7 +21,7 @@ func InitDatabase(dsn string) {
 	var err error
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
 		SkipDefaultTransaction: false,
-		NamingStrategy:         schema.NamingStrategy{SingularTable: true},//禁用表名加s
+		NamingStrategy:         schema.NamingStrategy{SingularTable: true}, //禁用表名加s
 
 		Logger:                                   logger.Default.LogMode(logger.Info), //打印sql语句
 		DisableAutomaticPing:                     false,

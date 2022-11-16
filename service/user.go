@@ -9,8 +9,8 @@ package service
 
 import (
 	"gorm.io/gorm"
-	"user-center/server/dao"
-	"user-center/server/model"
+	"user-center/dao"
+	"user-center/model"
 )
 
 type UserService struct {

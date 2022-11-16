@@ -9,7 +9,7 @@ package tool
 
 const (
 	SERVERERROR   = "服务端错误"
-	USERIDERROR		="用户ID错误"
+	USERIDERROR   = "用户ID错误"
 	USERNAMEERROR = "用户名错误"
 	PASSWORERROR  = "密码错误"
 	SUCCESS       = "成功"

@@ -7,7 +7,9 @@
 
 package dao
 
-import "user-center/server/model"
+import (
+	"user-center/model"
+)
 
 type UserDao struct {
 }

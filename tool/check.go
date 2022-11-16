@@ -46,18 +46,18 @@ func CheckPasswordLever(ps string) int {
 	a_z := `[a-z]{1}`
 	A_Z := `[A-Z]{1}`
 	symbol := `[!@#~$%^&*()+|_]{1}`
-	space:=`[ '-]`
+	space := `[ '-]`
 
 	//不允许存在空格或-或'，防sql注入
-	ok,err:=regexp.MatchString(space,ps)
-	if err!=nil{
-		log.Println("match space err:",err)
+	ok, err := regexp.MatchString(space, ps)
+	if err != nil {
+		log.Println("match space err:", err)
 		return 0
 	}
-	if ok{
+	if ok {
 		return 0
 	}
-	ok, err= regexp.MatchString(num, ps)
+	ok, err = regexp.MatchString(num, ps)
 	if err != nil {
 		log.Println("match num err:", err)
 		return 0

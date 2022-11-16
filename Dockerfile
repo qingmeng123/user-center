@@ -14,7 +14,7 @@ RUN echo "https://mirrors.aliyun.com/alpine/v3.4/main/" > /etc/apk/repositories 
 WORKDIR /app
 COPY . /app
 
-RUN go build ./server/cmd
+RUN go build .
 
 EXPOSE 30001
 

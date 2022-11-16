@@ -14,15 +14,15 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"net/http"
 	"time"
-	"user-center/server/conf"
-	"user-center/server/model"
+	"user-center/conf"
+	model2 "user-center/model"
 )
 
 var Secret = []byte(conf.TokenSecret)
 
 // CreateToken 创建token
-func CreateToken(user model.User, ExpireTime int64) (string, error) {
-	cla := model.MyClaims{
+func CreateToken(user model2.User, ExpireTime int64) (string, error) {
+	cla := model2.MyClaims{
 		UserId:   int(user.ID),
 		UserName: user.Name,
 		Password: user.Password,
@@ -36,21 +36,21 @@ func CreateToken(user model.User, ExpireTime int64) (string, error) {
 }
 
 // ParseToken 解析token
-func ParseToken(tokenString string) (*model.MyClaims, error) {
-	token, err := jwt.ParseWithClaims(tokenString, &model.MyClaims{}, func(token *jwt.Token) (interface{}, error) {
+func ParseToken(tokenString string) (*model2.MyClaims, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &model2.MyClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return Secret, nil
 	})
 	if err != nil {
 		return nil, err
 	}
-	if claims, ok := token.Claims.(*model.MyClaims); ok && token.Valid {
+	if claims, ok := token.Claims.(*model2.MyClaims); ok && token.Valid {
 		return claims, nil
 	}
 	return nil, errors.New("invalid token")
 }
 
 // 获取第三方token
-func GetToken(url string) (*model.Token, error) {
+func GetToken(url string) (*model2.Token, error) {
 	// 形成请求
 	var req *http.Request
 	var err error
@@ -67,7 +67,7 @@ func GetToken(url string) (*model.Token, error) {
 	}
 
 	// 将响应体解析为 token，并返回
-	var token model.Token
+	var token model2.Token
 	if err = json.NewDecoder(res.Body).Decode(&token); err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ func GetToken(url string) (*model.Token, error) {
 }
 
 // 获取第三方用户信息
-func GetUserInfo(token *model.Token) (map[string]interface{}, error) {
+func GetUserInfo(token *model2.Token) (map[string]interface{}, error) {
 
 	// 形成请求
 	var userInfoUrl = "https://api.github.com/user" // github用户信息获取接口
