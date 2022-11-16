@@ -28,8 +28,7 @@ func unaryInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServ
 	return m, err
 }
 
-
-func getAuthInterceptor(auth func(ctx context.Context)error) grpc.UnaryServerInterceptor {
+func getAuthInterceptor(auth func(ctx context.Context) error) grpc.UnaryServerInterceptor {
 	authInterceptor := func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 		//拦截普通方法请求，验证token
 		err = auth(ctx)
@@ -64,4 +63,3 @@ func authToken(ctx context.Context) error {
 	return nil
 
 }
-
