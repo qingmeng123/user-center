@@ -14,8 +14,8 @@ RUN echo "https://mirrors.aliyun.com/alpine/v3.4/main/" > /etc/apk/repositories 
 WORKDIR /app
 COPY . /app
 
-RUN go build cmd/main.go
+RUN go build -o app ./cmd
 
 EXPOSE 30001
 
-ENTRYPOINT ["./user-center"]
+ENTRYPOINT ["./app"]
